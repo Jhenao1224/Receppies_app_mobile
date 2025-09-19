@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "253365573816",
+    "project_id": "recepies-app-jdh",
+    "storage_bucket": "recepies-app-jdh.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253365573816:android:e02226792a9294a94b3c4d",
+        "android_client_info": {
+          "package_name": "com.example.receipes_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfzkzoQR0zEggnAdKRIHUzR6Xa00hF3J4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
