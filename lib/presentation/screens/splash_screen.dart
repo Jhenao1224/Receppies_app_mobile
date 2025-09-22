@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:receipes_app/presentation/screens/home_screen.dart';
+import 'package:receipes_app/presentation/screens/login_screen.dart';
+import 'package:receipes_app/providers/auth_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
@@ -9,6 +13,33 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _checkAuthState();
+  }
+
+
+  void _checkAuthState() {
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        final authProvider = context.read<AuthProvider>();
+        if (authProvider.authState == AuthState.authenticated) {
+          Navigator.pushReplacement(
+            context, 
+            MaterialPageRoute(builder: (context) => HomeScreen())
+          );
+        } else {
+          Navigator.pushReplacement(
+            context, 
+            MaterialPageRoute(builder: (context) => LoginScreen())
+          );
+        }
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 SizedBox(height: 200),
                 Text('Get Cooking',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: Colors.white, fontSize: 50),
-                ),
-            
+                ),                
                 Text('Simple way to find Tasty Recipes',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white),
                 ),

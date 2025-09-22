@@ -1,24 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:receipes_app/components/custom_text_field.dart';
 import 'package:receipes_app/components/primary_button.dart';
-import 'package:receipes_app/presentation/screens/login_screen.dart';
-import 'package:receipes_app/presentation/screens/signup_screen.dart';
+import 'package:receipes_app/core/dependecy_injection.dart';
+import 'package:receipes_app/firebase_options.dart';
 import 'package:receipes_app/presentation/screens/splash_screen.dart';
 import 'package:receipes_app/themes/app_themes.dart';
-import 'package:receipes_app/constants/custom_colors.dart';
 import 'package:receipes_app/providers/theme_provider.dart';
 
-void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ThemeProvider(),
-        )
-      ],
-      child: const MyApp(),)
-    );
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  
+  runApp(MultiProvider(providers: DependecyInjection.providers, child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
