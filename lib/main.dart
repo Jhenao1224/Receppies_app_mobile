@@ -4,6 +4,7 @@ import 'package:receipes_app/components/custom_text_field.dart';
 import 'package:receipes_app/components/primary_button.dart';
 import 'package:receipes_app/presentation/screens/login_screen.dart';
 import 'package:receipes_app/presentation/screens/signup_screen.dart';
+import 'package:receipes_app/presentation/screens/splash_screen.dart';
 import 'package:receipes_app/themes/app_themes.dart';
 import 'package:receipes_app/constants/custom_colors.dart';
 import 'package:receipes_app/providers/theme_provider.dart';
@@ -29,11 +30,12 @@ class MyApp extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Recipes App',
           theme: AppThemes.lightTheme,
           darkTheme: AppThemes.darkTheme,
-          themeMode: themeProvider.isDark ? ThemeMode.dark : ThemeMode.light,
-          home: LoginScreen(),
+          themeMode: 
+            themeProvider.isDark ? ThemeMode.dark : ThemeMode.light,
+          home: SplashScreen(),
         );
       },
     );
