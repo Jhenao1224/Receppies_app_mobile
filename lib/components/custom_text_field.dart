@@ -8,12 +8,14 @@ class CustomTextField extends StatefulWidget {
     this.isPassword = false, 
     this.keyboardType = TextInputType.text,
     this.placeholder,
+    this.validator,
   }) : super(key: key);
   String label;
   bool isPassword;
   TextInputType? keyboardType;
   TextEditingController  controller; 
   String ? placeholder;
+  FormFieldValidator<String>? validator;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -43,18 +45,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
       children: [
         Text(widget.label, style: Theme.of(context).textTheme.bodyLarge,),
         SizedBox(height: 8,), 
-        TextField(
-        obscureText: _isObscured,
-        controller: _controller,
-        keyboardType: widget.keyboardType,
-        decoration: InputDecoration(
-          labelText: widget.placeholder,
-          labelStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),),
-          suffixIcon: widget.isPassword ? IconButton(
-              icon: Icon(_isObscured ? Icons.visibility : Icons.visibility_off,),
-              onPressed: toggleObscured,
-            ) : null,
+        TextFormField(
+          obscureText: _isObscured,
+          controller: _controller,
+          keyboardType: widget.keyboardType,
+          validator: widget.validator,
+          decoration: InputDecoration(
+            labelText: widget.placeholder,
+            labelStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+            suffixIcon: widget.isPassword
+                ? IconButton(
+                    icon: Icon(
+                      _isObscured ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: toggleObscured,
+                  )
+                : null,
           ),
         )
       ],
