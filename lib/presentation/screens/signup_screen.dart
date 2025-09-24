@@ -4,11 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:receipes_app/components/custom_text_field.dart';
 import 'package:receipes_app/components/primary_button.dart';
 import 'package:receipes_app/constants/custom_colors.dart';
+import 'package:receipes_app/constants/validator.dart';
 import 'package:receipes_app/presentation/screens/login_screen.dart';
 import 'package:receipes_app/providers/auth_provider.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -18,8 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   bool _isAcceptTerms = false;
@@ -35,7 +35,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
         return;
       }
-
 
       final authProvider = context.read<AuthProvider>();
       authProvider.signUp(
@@ -79,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 CustomTextField(
                   label: 'Name',
                   placeholder: 'Enter your name',
-                  controller: _nameController,
+                  controller: _nameController, 
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your name';
@@ -96,6 +95,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
+                    }
+                    if (!isValidEmail(value)) {
+                      return 'Please enter a valid email';
                     }
                     return null;
                   },
@@ -126,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please confirm your password';
                     }
-                    if (value != _passwordController.text) {
+                    if (value.trim() != _passwordController.text.trim()) {
                       return 'Passwords do not match';
                     }
                     return null;

@@ -82,7 +82,7 @@ class AuthProvider extends ChangeNotifier{
   Future<void> signUp({ required String name, required String email, required String password, required String confirmPassword}) async {
     _setState(AuthState.loading);
     final result = await _signUpUseCase.execute(name: name, email: email, password: password, confirmPassword: confirmPassword);
-
+    
     if (result.isSuccess) {
       _errorMessage = null;
       

@@ -1,4 +1,4 @@
-import 'package:email_validator/email_validator.dart';
+import 'package:receipes_app/constants/validator.dart';
 import 'package:receipes_app/domain/entities/auth_results.dart';
 import 'package:receipes_app/domain/repositories/auth_repository.dart';
 import 'package:receipes_app/domain/repositories/user_repository.dart';
@@ -16,10 +16,11 @@ class SigUpUsecase {
     required String confirmPassword,
   }) async {
     if (name.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+      print('Usecase: Name: $name, Email: $email, Password: $password, Confirm Password: $confirmPassword');
       return AuthResults.error('All fields are required.');
     }
 
-    if (!EmailValidator.validate(email)) {
+    if (!isValidEmail(email)) {
       return AuthResults.error('Invalid email format.');
     }
 

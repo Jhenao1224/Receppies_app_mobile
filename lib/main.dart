@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:receipes_app/components/primary_button.dart';
 import 'package:receipes_app/core/dependecy_injection.dart';
-import 'package:receipes_app/firebase_options.dart';
 import 'package:receipes_app/presentation/screens/splash_screen.dart';
 import 'package:receipes_app/themes/app_themes.dart';
 import 'package:receipes_app/providers/theme_provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp();
   
   runApp(MultiProvider(providers: DependecyInjection.providers, child: const MyApp()));
 }

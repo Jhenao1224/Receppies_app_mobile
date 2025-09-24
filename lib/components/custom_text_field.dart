@@ -22,7 +22,6 @@ class CustomTextField extends StatefulWidget {
 } 
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  final TextEditingController _controller = TextEditingController();
 
   bool _isObscured = true;
   @override
@@ -47,7 +46,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         SizedBox(height: 8,), 
         TextFormField(
           obscureText: _isObscured,
-          controller: _controller,
+          controller: widget.controller,
           keyboardType: widget.keyboardType,
           validator: widget.validator,
           decoration: InputDecoration(

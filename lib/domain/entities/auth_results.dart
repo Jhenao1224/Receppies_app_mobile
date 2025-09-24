@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:receipes_app/domain/entities/user_entity.dart';
 
 class AuthResults extends Equatable{
@@ -14,7 +13,7 @@ class AuthResults extends Equatable{
   });
   
   const AuthResults.sucess(UserEntity user) 
-    : user = user,
+    : this.user = user,
       errorMessage = null,
       isSuccess = true;
 
